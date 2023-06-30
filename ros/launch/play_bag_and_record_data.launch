@@ -1,0 +1,30 @@
+<launch>
+
+    <arg name="directory_rosbag" value="/home/paulo/catkin_ws/bagfiles"/>
+    <arg name="filenames"/>
+    <arg name="rate" default="1.0"/>
+    <arg name="start" default="0.0"/>
+
+<!-- Chama o launch que dá play e corre os restantes códigos necessários-->
+    <include file="$(dirname)/run_rosbag_play.launch">
+        <arg name="filenames" value="$(arg filenames)"/>
+        <arg name="rate" value="$(arg rate)"/>
+        <arg name="start" value="$(arg start)"/>
+    </include>
+
+<!-- Grava todos os tópicos -->
+
+     <node pkg="rosbag" type="record" name="rosbag_record_data_kiss_icp"
+        args="
+            --all 
+            --buffsize=1024  
+            --split 
+            --duration=15m 
+            --bz2 
+            --output-prefix $(arg directory_rosbag)/kiss_icp_data_.bag"
+        output="screen"
+        launch-prefix="bash -c 'sleep $(arg start); $0 $@'"
+        />
+
+
+</launch>

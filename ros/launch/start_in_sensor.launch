@@ -1,0 +1,11 @@
+<launch>
+    
+  <!--param name="/use_sim_time" value="true"/-->
+
+    <include file="/home/paulo/catkin_ws/src/rslidar_sdk/launch/start_no_run_rviz.launch"/>
+        
+    <include file="/home/paulo/catkin_ws/src/rs_to_velodyne/start.launch"/>
+        
+    <include file="$(dirname)/odometry.launch"/>
+        
+</launch>

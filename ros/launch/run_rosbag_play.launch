@@ -1,0 +1,30 @@
+<launch>
+  <!--
+    HOW TO RUN THIS LAUNCH FILE:
+    $ cd ~/bag_files/
+    $ roslaunch $(code_in_test) run_rosbag_play.launch filenames:=$(pwd)/log_<name of the log file>.bag
+  -->
+
+    <arg name="directory_rosbag" value="/home/paulo/catkin_ws/bagfiles"/>
+  <arg name="filenames"/>
+  <arg name="rate" default="1.0"/>
+  <arg name="start" default="0.0"/>
+
+  <!--param name="/use_sim_time" value="true"/-->
+
+  <!-- Código para inicializar a bagfile -->
+
+    <include file="/home/paulo/catkin_ws/src/rslidar_sdk/launch/rosbag_play/run_rosbag_play_cloudpoint.launch">
+        <arg name="filenames" value="$(arg filenames)"/>
+        <arg name="rate" value="$(arg rate)"/>
+        <arg name="start" value="$(arg start)"/> 
+    </include>
+
+  <!-- Código para converter a cloud_point -->
+    <include file="/home/paulo/catkin_ws/src/rs_to_velodyne/start.launch"/>
+
+  <!-- Código para o algoritmo -->     
+    <include file="$(dirname)/odometry.launch">
+        
+    </include>
+</launch>

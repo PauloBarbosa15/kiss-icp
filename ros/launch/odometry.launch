@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <launch>
-  <!-- ROS paramaters -->
+  <!-- ROS paramaters adapted by rslidar sensor-->
   <arg name="bagfile" default=""/>
   <arg name="visualize" default="true"/>
   <arg name="odom_frame" default="odom"/>
   <arg name="child_frame" default="base_link"/>
-  <arg name="topic" default=""/>
+  <arg name="topic" default="/velodyne_points"/> 
 
   <!-- KISS-ICP paramaters -->
   <arg name="deskew" default="false"/>
